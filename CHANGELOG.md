@@ -10,6 +10,7 @@
 
 ### Features
 
+-   [`dc29f10`](https://github.com/stdlib-js/stdlib/commit/dc29f108e512a5ad2be34a7c3f539457648c1ee2) - add \"broadcasting\" mode to require broadcast compatibility
 -   [`e9bf843`](https://github.com/stdlib-js/stdlib/commit/e9bf843b45b204ca61eca213575aa4933026b09b) - add `array/base/mskput`
 
 </section>
@@ -22,6 +23,7 @@
 
 <details>
 
+-   [`dc29f10`](https://github.com/stdlib-js/stdlib/commit/dc29f108e512a5ad2be34a7c3f539457648c1ee2) - **feat:** add \"broadcasting\" mode to require broadcast compatibility _(by Athan Reines)_
 -   [`e9bf843`](https://github.com/stdlib-js/stdlib/commit/e9bf843b45b204ca61eca213575aa4933026b09b) - **feat:** add `array/base/mskput` _(by Athan Reines)_
 
 </details>
