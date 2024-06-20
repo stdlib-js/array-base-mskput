@@ -35,38 +35,32 @@ limitations under the License.
 
 > Replace elements of an array with provided values according to a provided mask array.
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/array-base-mskput
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
-To use in Observable,
-
 ```javascript
-mskput = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/array-base-mskput@umd/browser.js' )
-```
-
-To vendor stdlib functionality and avoid installing dependency trees for Node.js, you can use the UMD server build:
-
-```javascript
-var mskput = require( 'path/to/vendor/umd/array-base-mskput/index.js' )
-```
-
-To include the bundle in a webpage,
-
-```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/array-base-mskput@umd/browser.js"></script>
-```
-
-If no recognized module system is present, access bundle contents via the global scope:
-
-```html
-<script type="text/javascript">
-(function () {
-    window.mskput;
-})();
-</script>
+var mskput = require( '@stdlib/array-base-mskput' );
 ```
 
 #### mskput( x, mask, values, mode )
@@ -76,7 +70,7 @@ Replaces elements of an array with provided values according to a provided mask 
 ```javascript
 var x = [ 1, 2, 3, 4 ];
 
-var out = mskput( x, [ 1, 0, 1, 0 ], [ 20, 40 ], 'throw' );
+var out = mskput( x, [ 1, 0, 1, 0 ], [ 20, 40 ], 'strict' );
 // returns [ 1, 20, 3, 40 ]
 
 var bool = ( out === x );
@@ -88,27 +82,29 @@ The function supports the following parameters:
 -   **x**: input array.
 -   **mask**: mask array.
 -   **values**: values to set.
--   **mode**: string specifying whether to raise an exception when the number of `values` is less than the number of falsy `mask` values.
+-   **mode**: string specifying behavior when the number of `values` does not equal the number of falsy `mask` values.
 
 The function supports the following modes:
 
--   `'throw'`: specifies that the function must raise an exception when the function is provided insufficient `values` to satisfy the `mask` array.
+-   `'strict'`: specifies that the function must raise an exception when the number of `values` does not **exactly** equal the number of falsy `mask` values.
+-   `'non_strict'`: specifies that the function must raise an exception when the function is provided insufficient `values` to satisfy the `mask` array.
+-   `'strict_broadcast'`: specifies that the function must broadcast a single-element `values` array and otherwise raise an exception when the number of `values` does not **exactly** equal the number of falsy `mask` values.
 -   `'broadcast'`: specifies that the function must broadcast a single-element `values` array and otherwise raise an exception when the function is provided insufficient `values` to satisfy the `mask` array.
 -   `'repeat'`: specifies that the function must reuse provided `values` when replacing elements in `x` in order to satisfy the `mask` array.
 
-When `mode` is equal to `'broadcast`', the function supports broadcasting a `values` array containing a single element against the number of falsy values in the `mask` array.
+In broadcasting modes, the function supports broadcasting a `values` array containing a single element against the number of falsy values in the `mask` array.
 
 ```javascript
 var x = [ 1, 2, 3, 4 ];
 
-var out = mskput( x, [ 1, 0, 1, 0 ], [ 20 ], 'broadcast' );
+var out = mskput( x, [ 1, 0, 1, 0 ], [ 20 ], 'strict_broadcast' );
 // returns [ 1, 20, 3, 20 ]
 
 var bool = ( out === x );
 // returns true
 ```
 
-When `mode` is equal to `repeat`, the function supports recycling elements in a `values` array to satisfy the number of falsy values in the `mask` array.
+In repeat mode, the function supports recycling elements in a `values` array to satisfy the number of falsy values in the `mask` array.
 
 ```javascript
 var x = [ 1, 2, 3, 4 ];
@@ -141,17 +137,12 @@ var bool = ( out === x );
 
 <!-- eslint no-undef: "error" -->
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/array-base-filled-by@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/random-base-discrete-uniform@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/random-base-bernoulli@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/array-base-linspace@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/array-base-mskput@umd/browser.js"></script>
-<script type="text/javascript">
-(function () {
+```javascript
+var filledBy = require( '@stdlib/array-base-filled-by' );
+var discreteUniform = require( '@stdlib/random-base-discrete-uniform' );
+var bernoulli = require( '@stdlib/random-base-bernoulli' );
+var linspace = require( '@stdlib/array-base-linspace' );
+var mskput = require( '@stdlib/array-base-mskput' );
 
 // Generate a linearly spaced array:
 var x = linspace( 0, 100, 11 );
@@ -167,13 +158,8 @@ var values = filledBy( N, discreteUniform.factory( 1000, 2000 ) );
 console.log( values );
 
 // Update a random sample of elements in `x`:
-var out = mskput( x, mask, values, 'throw' );
+var out = mskput( x, mask, values, 'non_strict' );
 console.log( out );
-
-})();
-</script>
-</body>
-</html>
 ```
 
 </section>
