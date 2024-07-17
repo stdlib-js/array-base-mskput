@@ -4,7 +4,7 @@
 
 <section class="release" id="unreleased">
 
-## Unreleased (2024-06-20)
+## Unreleased (2024-07-17)
 
 <section class="features">
 
@@ -47,6 +47,8 @@
 
 <details>
 
+-   [`8d4c46b`](https://github.com/stdlib-js/stdlib/commit/8d4c46b10ca912401e0ff0caa37a17cd3c443c2f) - **refactor:** update paths _(by Athan Reines)_
+-   [`18b3c79`](https://github.com/stdlib-js/stdlib/commit/18b3c79c5035c7082618b7379cd6576e64393a96) - **refactor:** update paths _(by Athan Reines)_
 -   [`2769ce9`](https://github.com/stdlib-js/stdlib/commit/2769ce9e876c2a6de5735ffdbc4c79b3d26347b6) - **fix:** require broadcast compatibility _(by Athan Reines)_
 -   [`96f430f`](https://github.com/stdlib-js/stdlib/commit/96f430f4a1c3e3ded241118139d5359404963a99) - **test:** fix description and docs _(by Athan Reines)_
 -   [`7c3729c`](https://github.com/stdlib-js/stdlib/commit/7c3729c19fdda77bfb15009ab4e52a4dfb59f73d) - **feat:** add support for additional modes _(by Athan Reines)_
